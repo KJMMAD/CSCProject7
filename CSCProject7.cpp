@@ -30,11 +30,14 @@ int getAnswers(int size, string fileNameStudentAns, char studAnswers[], string f
 * compares the array and determines the number of missed questions and stores the incorrect question number in an array
 * then in a parrallel 2D array the correct answer and student answer are stored at the same time
 * Parameters:
-* - char 
+* - char studAnswers[]: array of the students answers for the test
+* - char examAnswers[]: array of the test answers
+* - int questionNumber[]: array for the question number of each incorrectly answered question
+* - char questionAnswer[]: 2D array holding the test answers and incorrect student answers
 * Return:
 * - int: Number of incorrect answers
-* - array: Contains question numbers of incorrect answers
-* - array: 2D array holding the correct answer and the students answer
+* - int array: Contains question numbers of incorrect answers
+* - char array: 2D array holding the correct answer and the students answer
 * Precondition:
 * - None
 * Postcondition:
