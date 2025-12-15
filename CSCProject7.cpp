@@ -1,26 +1,24 @@
 #include <iostream>
 #include <vector>
-#include <iomanip>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
-const string fileNameStud = "C:\\Users\\cmmsk\\Downloads\\Teams.txt", fileNameExam = "C:\\Users\\cmmsk\\Downloads\\WorldSeriesWinners.txt";
+const string fileNameTeams = "C:\\Users\\cmmsk\\Downloads\\Teams.txt", fileNameWinners = "C:\\Users\\cmmsk\\Downloads\\WorldSeriesWinners.txt";
 
 /*
 * Func: getTeams
 * Purpose: Opens files of a given name, verifies if they opened correctly, and puts the data into a reference of a vector
-* - string fileTeams: name of full file location for the team names
-* - string fileWinners: name of full file location for the world series winners
-* - string vector teamNames: vector with the names of major league baseball teams
-* - string vector seriesWinners: vector with the names of winners for each year in order
+* - string fileName: name of full file location for the team names
+* - string vector fileArr[]: vector holding data from the file
 * Return:
 * - None
 * Preconditions:
 * - None
 * Postconditions:
-* - Modify two vectors using values from the files
+* - Modify vector indices using information from the file
 */
-string getTeams(string fileTeams, string fileWinners, string teamNames[], string seriesWinners[]);
+int getTeams(string fileName, vector <string> &fileVect);
 
 /*
 * Func: findWinner
@@ -36,13 +34,31 @@ string getTeams(string fileTeams, string fileWinners, string teamNames[], string
 * Postcondition:
 * - Returns an int
 */
-int findWinner(string teamName, string seriesWinners[]);
+int findWinner(string teamName, vector <string> seriesWinners);
 
 int main()
 {
+    vector <string> teamNames;
+    vector <string> seriesWinners;
+    getTeams(fileNameTeams, teamNames);
+    getTeams(fileNameWinners, seriesWinners);
+    for (int i = 0; i < teamNames.size(); i++) {
+        cout << teamNames[i] << endl;
+    }
+
     return 0;
 }
 
-string getTeams(string fileTeams, string fileWinners, string teamNames[], string seriesWinners[]) {
-    ifstream fileTeams;
+int getTeams(string fileName, vector <string> &fileVect) {
+    string name;
+    ifstream infile(fileName);
+    if (!infile) {
+        cerr << "Error opening file." << endl;
+        return 1;
+    }
+    while (getline(infile, name)) {
+        fileVect.push_back(name);
+    }
+    infile.close();
+    return 0;
 }
