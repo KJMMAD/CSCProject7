@@ -40,11 +40,28 @@ int main()
 {
     vector <string> teamNames;
     vector <string> seriesWinners;
+    string inName;
+
     getTeams(fileNameTeams, teamNames);
     getTeams(fileNameWinners, seriesWinners);
+
+    cout << "Team names:" << endl;
     for (int i = 0; i < teamNames.size(); i++) {
         cout << teamNames[i] << endl;
     }
+
+    cout << endl;
+
+    do {
+        cout << "Enter the name of a team (enter quit to end)" << endl;
+        getline (cin, inName);
+        cout << endl;
+
+        if (inName != "quit" && inName != "Quit") {
+            int wins = findWinner(inName, seriesWinners);
+            cout << "The " << inName << " won the world series " << wins << " times." << endl;
+        }
+    } while (inName != "quit" && inName != "Quit");
 
     return 0;
 }
@@ -61,4 +78,14 @@ int getTeams(string fileName, vector <string> &fileVect) {
     }
     infile.close();
     return 0;
+}
+
+int findWinner(string teamName, vector <string> seriesWinners) {
+    int winCount = 0;
+    for (string name : seriesWinners) {
+        if (teamName == name) {
+            winCount++;
+        }
+    }
+    return winCount;
 }
